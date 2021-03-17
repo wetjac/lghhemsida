@@ -5,7 +5,7 @@ import Layout from "../components/layout"
 const Homepage = () => {
     return (
         <Layout>
-            <h1>Profile</h1>
+            <h1>Homepage</h1>
             <p>This will be the homepage</p>
         </Layout>
     )
