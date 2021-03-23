@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link, graphql, useStaticQuery } from 'gatsby'
 
-import Layout from "../components/layout"
+import Layout from '../components/layout'
+import * as blogStyles from './byten.module.scss'
 
 const Byten = () => {
     const data = useStaticQuery(graphql`
@@ -27,7 +28,7 @@ const Byten = () => {
     return (
         <Layout>
             <h1>Bytessida</h1>
-            <ol>
+            <ol className={blogStyles.posts}>
                 {data.allMarkdownRemark.edges.map((edge) => {
                     return (
                         <li>
