@@ -1,43 +1,18 @@
-const path = require('path')
+/**
+ * Implement Gatsby's Node APIs in this file.
+ *
+ * See: https://www.gatsbyjs.com/docs/node-apis/
+ */
 
-module.exports.onCreateNode = ({ node, actions }) => {
-    const { createNodeField } = actions
+exports.onCreatePage = async ({ page, actions }) => {
+  const { createPage } = actions
 
-    if (node.internal.type === 'MarkdownRemark') {
-        const slug = path.basename(node.fileAbsolutePath, '.md')
+  // page.matchPath is a special key that's used for matching pages
+  // only on the client.
+  if (page.path.match(/^\/app/)) {
+    page.matchPath = '/app/*'
 
-        createNodeField({
-            node,
-            name: 'slug',
-            value: slug
-        })
-    }
-}
-
-module.exports.createPages = async ({ graphql, actions }) => {
-    const { createPage } = actions
-    const bytenTemplate = path.resolve('./src/templates/byten.js')
-    const res = await graphql(`
-        query {
-            allMarkdownRemark {
-		        edges {
-			        node {
-                        fields {
-                            slug
-				        }
-			        }
-		        }
-            }
-        }
-    `)
-
-    res.data.allMarkdownRemark.edges.forEach((edge) => {
-        createPage({
-            component: bytenTemplate,
-            path: `/byten/${edge.node.fields.slug}`,
-            context: {
-                slug: edge.node.fields.slug
-            }
-        })
-    })
+    // Update the page.
+    createPage(page)
+  }
 }

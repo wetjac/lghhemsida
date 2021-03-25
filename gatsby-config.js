@@ -4,6 +4,7 @@ module.exports = {
         author: 'Jacqueline Wettergren'
     },
     plugins: [
+        'gatsby-plugin-react-helmet',
         'gatsby-plugin-sass',
         {
             resolve: 'gatsby-source-filesystem',
@@ -12,6 +13,11 @@ module.exports = {
                 path: `${__dirname}/src/`
             }
         },
+        {
+            resolve: 'gatsby-plugin-create-client-paths',
+            options: { prefixes: ['/app/*'] }
+    },
+
         'gatsby-plugin-sharp',
         {
             resolve: 'gatsby-transformer-remark',
@@ -30,3 +36,5 @@ module.exports = {
         }
     ]
 }
+
+
